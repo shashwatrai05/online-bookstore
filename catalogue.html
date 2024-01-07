@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100px;
+            max-height: 150px;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Book Catalog</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Cover Page</th>
+            <th>Author Name</th>
+            <th>Publisher</th>
+            <th>Price</th>
+            <th>Add to Cart</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Book 1 -->
+        <tr>
+            <td><img src="images/3.png" alt="Book 1 Cover">Calm Sea</td>
+            <td>Raj Singh</td>
+            <td>Leadstart Publishing</td>
+            <td>$19.99</td>
+            <td><button onclick="addToCart('Calm Sea', 'Raj Singh', 'Leadstart Publishing', 19.99)">Add to Cart</button></td>
+        </tr>
+
+        <!-- Book 2 -->
+        <tr>
+            <td><img src="images/1.png" alt="Book 2 Cover">Sword</td>
+            <td>Olivia Wilson</td>
+            <td>Jaico Publishing House</td>
+            <td>$15.99</td>
+            <td><button onclick="addToCart('Sword', 'Olivia Wilson', 'Jaico Publishing House', 15.99)">Add to Cart</button></td>
+        </tr>
+
+        <!-- Book 3 -->
+        <tr>
+            <td><img src="images/2.png" alt="Book 3 Cover">Alone</td>
+            <td>Morgan Maxwell</td>
+            <td>Westland Publications</td>
+            <td>$9.99</td>
+            <td><button onclick="addToCart('Alone', 'Morgan Maxwell', 'Westland Publications', 9.99)">Add to Cart</button></td>
+        </tr>
+
+        <!-- Book 4 -->
+        <tr>
+            <td><img src="images/4.png" alt="Book 4 Cover">Love Story</td>
+            <td>Olivia Wilson</td>
+            <td>Hachette India</td>
+            <td>$10.99</td>
+            <td><button onclick="addToCart('Love Story', 'Olivia Wilson', 'Hachette India', 10.99)">Add to Cart</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    function addToCart(bookName, author, publisher, price) {
+        const cartItem = { name: bookName, author: author, publisher: publisher, price: price, quantity: 1 };
+        
+        // Retrieve existing cart items from local storage
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Check if the book is already in the cart
+        const existingItemIndex = cartItems.findIndex(item => item.name === bookName);
+
+        if (existingItemIndex !== -1) {
+            // If the book is already in the cart, increment the quantity
+            cartItems[existingItemIndex].quantity += 1;
+        } else {
+            // Otherwise, add the new book to the cart
+            cartItems.push(cartItem);
+        }
+
+        // Save the updated cart items to local storage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+        // Notify the user or perform any other necessary actions
+
+        // Redirect to the cart page
+        window.location.href = 'cart.html';
+    }
+</script>
+
+</body>
+</html>
